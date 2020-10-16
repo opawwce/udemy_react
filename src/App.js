@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 function App() {
+  const numberOfFilms = +prompt("How many films did you watch?", "");
+  const lastSeeingFilm = prompt("Last seeing film?", "");
+  const lastFilmRating = +prompt("Rate it!", "");
+  const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false,
+  };
+
+  personalMovieDB.movies[lastSeeingFilm] = lastFilmRating;
+  console.log(personalMovieDB);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App-header">
+      <h1> All watched - {personalMovieDB.count}</h1>
+      {/* <h3> Last - {personalMovieDB}</h3> */}
     </div>
   );
 }
