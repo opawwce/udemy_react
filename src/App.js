@@ -1,88 +1,80 @@
 import React from "react";
 import "./App.css";
+// import styled from "styled-components";
 
 function App() {
-  let numberOfFilms;
-
-  function start() {
-    numberOfFilms = +prompt("How many films did you watch?", "");
-
-    while (
-      numberOfFilms == "" ||
-      numberOfFilms == null ||
-      isNaN(numberOfFilms)
-    ) {
-      numberOfFilms = +prompt("How many films did you watch?", "");
-    }
-  }
-
-  start();
-
   const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
     private: false,
-  };
-  // if (numberOfFilms) {
-  //   numberOfFilms = +prompt("How many films did you watch?", "");
-  // }
+    start: function () {
+      personalMovieDB.count = +prompt("How many films did you watch?", "");
 
-  function rememberMyFilms() {
-    for (let i = 0; i < numberOfFilms; i++) {
-      const lastSeeingFilm = prompt("Last seeing film?", "");
-      const lastFilmRating = +prompt("Rate it!", "");
-      if (
-        lastSeeingFilm !== null &&
-        lastFilmRating !== null &&
-        lastSeeingFilm !== "" &&
-        lastFilmRating !== "" &&
-        lastSeeingFilm.length < 50
+      while (
+        personalMovieDB.count === "" ||
+        personalMovieDB.count == null ||
+        isNaN(personalMovieDB.count)
       ) {
-        console.log("done");
-      } else {
-        console.log("error");
-        i--;
+        personalMovieDB.count = +prompt("How many films did you watch?", "");
       }
-      // personalMovieDB.movies[lastSeeingFilm] = lastFilmRating;
-    }
-  }
+    },
+    remeberMyFilms: function () {
+      for (let i = 0; i < 2; i++) {
+        const a = prompt("Last seeing film?", ""),
+          b = prompt("Rate it", "");
 
-  // rememberMyFilms();
+        if (a != null && b != null && a !== "" && b !== "" && a.length < 50) {
+          personalMovieDB.movies[a] = b;
+          console.log("done");
+        } else {
+          console.log("error");
+          i--;
+        }
+      }
+    },
+    detectPersonalLevel: function () {
+      if (personalMovieDB.count < 10) {
+        console.log("Seeing few movies");
+      } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+        console.log("you are classic viewer");
+      } else if (personalMovieDB.count >= 30) {
+        console.log("u r movie lover");
+      } else {
+        console.log("error!");
+      }
+    },
+    showMyDb: function (hidden) {
+      if (!hidden) {
+        console.log(personalMovieDB);
+      }
+    },
+    toggleVisibleMyDb: function () {
+      if (personalMovieDB.private) {
+        personalMovieDB.private = false;
+      } else {
+        personalMovieDB.private = true;
+      }
+    },
+    writeYourGenres: function () {
+      for (let i = 1; i <= 3; i++) {
+        let genre = prompt(`your favourite genre on number ${i}`);
 
-  function detectPersonalLevel() {
-    if (personalMovieDB.count < 10) {
-      console.log("Too little");
-    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-      console.log("Classic watcher");
-    } else if (personalMovieDB.count >= 30) {
-      console.log("Cinema lover!");
-    } else {
-      console.log("error");
-    }
-  }
-
-  // detectPersonalLevel();
-
-  // console.log(personalMovieDB);
-
-  function showMyDB(hidden) {
-    if (!hidden) {
-      console.log(personalMovieDB);
-    }
-  }
-
-  showMyDB(personalMovieDB.private);
-
-  function writeYourGenres() {
-    for (let i = 1; i <= numberOfFilms; i++) {
-      personalMovieDB.genres[i - 1] = prompt(
-        `Your favorite genre in count of ${i}`
-      );
-    }
-  }
-  writeYourGenres();
+        if (genre === "" || genre == null) {
+          console.log("incorrect data or null");
+          i--;
+        } else {
+          personalMovieDB.genres[i - 1] = genre;
+        }
+      }
+      personalMovieDB.genres.forEach((item, i) => {
+        console.log(`favourite genre ${i + 1} is ${item}`);
+      });
+    },
+  };
+  console.log(personalMovieDB);
+  personalMovieDB.start();
 
   return (
     <div className="App-header">
