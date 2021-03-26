@@ -33,5 +33,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "main": "index.js",
+  "repository": "https://github.com/opawwce/udemy_react.git",
+  "author": "Oleg Kolpakov <oleg_kolpakov@icloud.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack-cli": "^4.5.0"
   }
 }
